@@ -24,10 +24,11 @@
     <!-- JQVMap -->
     <link href="/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
-    <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    {{--<link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">--}}
 
     <!-- Custom Theme Style -->
     <link href="/css/custom.min.css" rel="stylesheet">
+
 
     <script>
         window.Laravel = {!! json_encode([

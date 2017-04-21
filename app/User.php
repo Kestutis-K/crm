@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'remember_token', 'role_id'
+        'name', 'email', 'password', 'remember_token', 'role_id', 'is_active'
     ];
 
     /**
@@ -27,8 +27,24 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+//    public static function boot(){
+//        parent::boot();
+//
+//        // Attach event handler, on deleting of the user
+//        User::deleting(function($user)
+//        {
+//            // Delete all tricks that belong to this user
+//            foreach ($user->profile as $profile) {
+//                $profile->delete();
+//            }
+//        });
+//    }
 
     public function role() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Role');
+    }
+
+    public function profile() {
+        return $this->hasOne('App\Profile', 'user_id');
     }
 }

@@ -25,58 +25,18 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Auth gates for: Roles
-        Gate::define('role_access', function ($user) {
-            return in_array($user->role_id, [1]);
-        });
-        Gate::define('role_create', function ($user) {
-            return in_array($user->role_id, [1]);
-        });
-        Gate::define('role_edit', function ($user) {
-            return in_array($user->role_id, [1]);
-        });
-        Gate::define('role_view', function ($user) {
-            return in_array($user->role_id, [1]);
-        });
-        Gate::define('role_delete', function ($user) {
+
+        //Auth gates for: only admin
+        Gate::define('admin', function ($user) {
             return in_array($user->role_id, [1]);
         });
 
-        // Auth gates for: Users
-        Gate::define('user_access', function ($user) {
-            return in_array($user->role_id, [1]);
-        });
-        Gate::define('user_create', function ($user) {
-            return in_array($user->role_id, [1]);
-        });
-        Gate::define('user_edit', function ($user) {
-            return in_array($user->role_id, [1]);
-        });
-        Gate::define('user_view', function ($user) {
-            return in_array($user->role_id, [1]);
-        });
-        Gate::define('user_delete', function ($user) {
-            return in_array($user->role_id, [1]);
+        Gate::define('admin_manager', function ($user) {
+            return in_array($user->role_id, [1,2]);
         });
 
-        // Auth gates for: Profiles
-        Gate::define('profile_access', function ($user) {
+        Gate::define('all', function ($user) {
             return in_array($user->role_id, [1,2,3]);
-        });
-        Gate::define('profile_create', function ($user) {
-            return in_array($user->role_id, [1]);
-        });
-        Gate::define('profile_edit', function ($user) {
-            return in_array($user->role_id, [1,2,3]);
-        });
-        Gate::define('profile_view', function ($user) {
-            return in_array($user->role_id, [1,2,3]);
-        });
-        Gate::define('profile_index', function ($user) {
-            return in_array($user->role_id, [1]);
-        });
-        Gate::define('profile_delete', function ($user) {
-            return in_array($user->role_id, [1]);
         });
     }
 }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
-class ProfileController extends Controller
+class ProfilesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +16,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        if (! Gate::allows('role_create')) {
-            return abort(401);
-        }
+        //
     }
 
     /**
@@ -25,7 +26,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -58,7 +59,11 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (! Gate::allows('all')) {
+            return abort(401);
+        }
+        $profile = Profile::findOrFail($id);
+        return view('profiles.edit', compact('profile'));
     }
 
     /**
@@ -70,7 +75,14 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (! Gate::allows('all')) {
+            return abort(401);
+        }
+        $input = $request->all();
+        $profile = Profile::findOrFail($id);
+        $profile->update($input);
+        session()->flash('flash_blue', 'Profilis atnaujintas!');
+        return back();
     }
 
     /**
@@ -83,4 +95,6 @@ class ProfileController extends Controller
     {
         //
     }
+
+
 }
