@@ -23,11 +23,12 @@
     <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
     <link href="/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+
     <!-- bootstrap-daterangepicker -->
     {{--<link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">--}}
 
     <!-- Custom Theme Style -->
-    <link href="/css/custom.min.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
 
 
     <script>

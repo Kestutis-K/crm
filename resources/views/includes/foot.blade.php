@@ -36,6 +36,5 @@
 <!-- bootstrap-daterangepicker -->
 <script src="/vendors/moment/min/moment.min.js"></script>
 {{--<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>--}}
-
 <!-- Custom Theme Scripts -->
-<script src="/js/custom.min.js"></script>
+<script src="/js/custom.js"></script>

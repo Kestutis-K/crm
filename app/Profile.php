@@ -7,8 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     protected $fillable = [
-        'user_id', 'firstname', 'lastname', 'position', 'email', 'phone', 'birthday', 'photo'
+        'user_id', 'firstname', 'lastname', 'position', 'email', 'phone', 'photo', 'birthday',
     ];
+
+    protected $uploads = '/images/';
+
+    public function getFileAttribute($photo){
+        return $this->uploads . $photo;
+    }
+
+
 
 
 }

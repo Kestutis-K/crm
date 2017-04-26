@@ -13,7 +13,7 @@
         <div class="clearfix"></div>
 
         <div class="row">
-            <!-- form input mask -->
+            <!-- form profile -->
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
@@ -93,10 +93,42 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
-            </div>
-            <!-- /form input mask -->
+                {{------- Change photo -------}}
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Nuotrauka</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
 
-            <!-- form color picker -->
+                        <div class="row">
+                            <img src="/images/avatars/{{$profile->photo}}" alt="{{$profile->firstname}}">
+                        </div>
+                        {!! Form::open(['method' => 'PUT', 'action' => ['ProfilesController@update', $profile->id], 'files' => true,]) !!}
+                        <div style="margin: 10px 0">
+                            {!! Form::file('photo') !!}
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 form-group">
+                                {!! Form::submit(trans('Pakeisti'), ['class' => 'btn btn-primary']) !!}
+                            </div>
+                        </div>
+
+
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+                {{------- /Change photo -------}}
+            </div>
+            <!-- /form profile -->
+
+            <!-- form cpasswords -->
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
@@ -125,7 +157,7 @@
                         <div class="form-group">
                             {!! Form::label('old_password', 'Dabartinis slaptažodis', ['class' => 'control-label col-md-3 col-sm-3 col-xs-3']) !!}
                             <div class="col-md-9 col-sm-9 col-xs-9">
-                                {!! Form::text('old_password', null, ['class' => 'form-control']) !!}
+                                {!! Form::password('old_password', ['class' => 'form-control']) !!}
                                 <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                             </div>
                         </div>
@@ -133,7 +165,7 @@
                         <div class="form-group">
                             {!! Form::label('password', 'Naujas slaptažodis', ['class' => 'control-label col-md-3 col-sm-3 col-xs-3']) !!}
                             <div class="col-md-9 col-sm-9 col-xs-9">
-                                {!! Form::text('password', null, ['class' => 'form-control']) !!}
+                                {!! Form::password('password', ['class' => 'form-control']) !!}
                                 <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                             </div>
                         </div>
@@ -141,7 +173,7 @@
                         <div class="form-group">
                             {!! Form::label('password_confirmation', 'Pakartoti naują slaptažodį', ['class' => 'control-label col-md-3 col-sm-3 col-xs-3']) !!}
                             <div class="col-md-9 col-sm-9 col-xs-9">
-                                {!! Form::text('password_confirmation', null, ['class' => 'form-control']) !!}
+                                {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                                 <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                             </div>
                         </div>
@@ -170,7 +202,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /form color picker -->
+            <!-- /form passwords-->
 
 
 

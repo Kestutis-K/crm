@@ -42,7 +42,7 @@
                                             </ul>
                                         </div>
                                         <div class="right col-xs-5 text-center">
-                                            <img src="images/{{$user->profile['photo']}}" alt="" class="img-circle img-responsive">
+                                            <img src="images/avatars/{{$user->profile['photo']}}" alt="" class="img-circle img-responsive">
                                         </div>
                                     </div>
                                     <div class="col-xs-12 bottom text-center">
@@ -62,6 +62,12 @@
                                                     @endif
 
                                             <a href="{{route('profiles.edit', ['id' => $user->profile['id']])}}"><button type="button" class="btn btn-success btn-xs">  <i class="fa fa-edit"></i> Keisti </button></a>
+                                            {!! Form::close() !!}
+                                            {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id]]) !!}
+                                                <div class="col-xs-12 form-group">
+                                                    {!! Form::submit(trans('Trinti'), ['class' => 'btn btn-danger btn-xs']) !!}
+                                                </div>
+                                            </div>
                                             {!! Form::close() !!}
 
 

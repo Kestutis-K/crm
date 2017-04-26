@@ -22,5 +22,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('roles', 'RolesController');
     Route::resource('users', 'UsersController');
     Route::resource('profiles', 'ProfilesController');
+    Route::resource('companies', 'CompaniesController');
     Route::post('changepassword/{id}', 'UsersController@changePassword');
 });

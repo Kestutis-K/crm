@@ -43,7 +43,7 @@
                         <div class="form-group">
                             {!! Form::label('password', 'Slaptažodis', ['class' => 'control-label col-md-3 col-sm-3 col-xs-3']) !!}
                             <div class="col-md-9 col-sm-9 col-xs-9">
-                                {!! Form::text('password', old('password'), ['class' => 'form-control']) !!}
+                                {!! Form::password('password', ['class' => 'form-control']) !!}
                                 <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                         <div class="form-group">
                             {!! Form::label('password_confirmation', 'Pakartoti naują slaptažodį', ['class' => 'control-label col-md-3 col-sm-3 col-xs-3']) !!}
                             <div class="col-md-9 col-sm-9 col-xs-9">
-                                {!! Form::text('password_confirmation', old('confirm_password'), ['class' => 'form-control']) !!}
+                                {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                                 <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
 
                         <div class="form-group">
                             <div class="col-md-9 col-md-offset-3">
-                                {!! Form::submit(trans('Keisti slaptažodį'), ['class' => 'btn btn-success']) !!}
+                                {!! Form::submit(trans('Sukurti vartotoją'), ['class' => 'btn btn-success']) !!}
                             </div>
                         </div>
 

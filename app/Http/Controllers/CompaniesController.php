@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
+use App\Company;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 
-
-class ProfilesController extends Controller
+class CompaniesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,10 +25,7 @@ class ProfilesController extends Controller
      */
     public function create()
     {
-        if (! Gate::allows('admin')) {
-            return abort(401);
-        }
-
+        //
     }
 
     /**
@@ -44,9 +36,7 @@ class ProfilesController extends Controller
      */
     public function store(Request $request)
     {
-        if (! Gate::allows('admin')) {
-            return abort(401);
-        }
+      //
     }
 
     /**
@@ -68,11 +58,11 @@ class ProfilesController extends Controller
      */
     public function edit($id)
     {
-        if (! Gate::allows('all')) {
+        if (! Gate::allows('admin')) {
             return abort(401);
         }
-        $profile = Profile::findOrFail($id);
-        return view('profiles.edit', compact('profile'));
+        $company = Company::findOrFail($id);
+        return view('companies.edit', compact('company'));
     }
 
     /**
@@ -84,28 +74,13 @@ class ProfilesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (! Gate::allows('all')) {
+        if (! Gate::allows('admin')) {
             return abort(401);
         }
         $input = $request->all();
-        $profile = Profile::findOrFail($id);
-        if($request->hasFile('photo')) {
-            if(file_exists(public_path().'/images/avatars/'.$profile->photo)) {
-                if($profile->photo != '150x150.png') {
-            unlink(public_path().'/images/avatars/'.$profile->photo);} }
-            $file = $request->file('photo');
-            $name = time() .".". $file->getClientOriginalExtension();
-            $img = Image::make($file)->resize(null, 150, function($constraint) {$constraint->aspectRatio();})->crop(150,150);
-            $img->save('images/avatars/'.$name, 99);
-            $profile->photo = $name;
-            $profile->update();
-            session()->flash('flash_blue', 'Profilio nuotrauka atnaujinta!');
-            return back();
-        } else {
-        $profile->update($input);
-        session()->flash('flash_blue', 'Profilis atnaujintas!');
-        return back();
-        }
+        $company = Company::findOrFail($id);
+        $company->update($input);
+        return redirect(route('companies.edit', $company->id));
     }
 
     /**
@@ -118,6 +93,4 @@ class ProfilesController extends Controller
     {
         //
     }
-
-
 }

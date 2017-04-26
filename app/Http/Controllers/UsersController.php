@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use PhpParser\Node\Stmt\Foreach_;
 
 class UsersController extends Controller
 {
@@ -57,7 +59,9 @@ class UsersController extends Controller
         $input = $request->all();
             $hashed = Hash::make($input['password']);
             $input['password'] = $hashed;
-           User::create($input);
+           $user = User::create($input);
+           $profile = ['firstname'=>null, 'lastname'=>null, 'position'=>null, 'email'=>$user->email, 'phone'=>null, 'photo'=>'150x150.png', 'birthday'=>null, 'user_id' => $user->id];
+           Profile::create($profile);
 
         return redirect()->route('users.index');
     }
@@ -118,8 +122,15 @@ class UsersController extends Controller
         if (! Gate::allows('admin')) {
             return abort(401);
         }
-        $user = User::findOrFail($id);
+        //$user = User::findOrFail($id);
+        $users = User::with('profile')->where('id', $id)->get();
+        foreach ($users as $user) {
+            if($user->profile->photo != '150x150.png') {
+        unlink(public_path().'/images/avatars/'.$user->profile->photo);}
+        $user->profile->delete();
         $user->delete();
+        }
+        return view('users.index', compact('users'));
     }
 
     public function changePassword(PasswordRequest $request, $id) {
