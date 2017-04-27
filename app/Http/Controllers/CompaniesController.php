@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Http\Requests\CompanyRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Intervention\Image\Facades\Image;
 
 class CompaniesController extends Controller
 {
@@ -72,15 +74,29 @@ class CompaniesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CompanyRequest $request, $id)
     {
         if (! Gate::allows('admin')) {
             return abort(401);
         }
         $input = $request->all();
         $company = Company::findOrFail($id);
-        $company->update($input);
-        return redirect(route('companies.edit', $company->id));
+        if($request->hasFile('logo')) {
+            if(file_exists(public_path().'/images/logo/'.$company->logo)) {
+                if($company->logo != 'logo.png') {
+                    unlink(public_path().'/images/logo/'.$company->logo);} }
+            $file = $request->file('logo');
+            $name = time() .".". $file->getClientOriginalExtension();
+            $img = Image::make($file)->resize(null, 250, function($constraint) {$constraint->aspectRatio();});
+            $img->save('images/logo/'.$name, 99);
+            $company->logo = $name;
+            $company->update();
+            session()->flash('flash_blue', 'Logotipas atnaujintas!');
+            return back();
+        } else {
+            $company->update($input);
+            return redirect(route('companies.edit', $company->id));
+        }
     }
 
     /**

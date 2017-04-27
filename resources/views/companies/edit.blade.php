@@ -167,7 +167,13 @@
                             </div>
                         </div>
 
+                        <div class="ln_solid"></div>
 
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                {!! Form::submit(trans('Atnaujinti duomenis'), ['class' => 'btn btn-success']) !!}
+                            </div>
+                        </div>
                         @if (count($errors) >0)
                             <div class="bg-danger">
                                 <ul>
@@ -179,18 +185,47 @@
                                 </ul>
                             </div>
                         @endif
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
 
-                        <div class="ln_solid"></div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                {{------- Change photo -------}}
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Įmonės logotipas</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    @if(session()->has('flash_blue'))
+                        <p class="bg-success"><strong>{{session()->get('flash_blue')}}</strong></p>
+                    @endif
+                    <div class="x_content">
 
-                        <div class="form-group">
-                            <div class="col-md-9 col-md-offset-3">
-                                {!! Form::submit(trans('Atnaujinti duomenis'), ['class' => 'btn btn-success']) !!}
+                        <div class="row">
+                            <img src="/images/logo/{{$company->logo}}" >
+                        </div>
+                        {!! Form::open(['method' => 'PUT', 'action' => ['CompaniesController@update', $company->id], 'files' => true,]) !!}
+                        <div style="margin: 10px 0">
+                            {!! Form::file('logo') !!}
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 form-group">
+                                {!! Form::submit(trans('Pakeisti'), ['class' => 'btn btn-success']) !!}
                             </div>
                         </div>
+
 
                         {!! Form::close() !!}
                     </div>
                 </div>
+                {{------- /Change photo -------}}
             </div>
 
 
