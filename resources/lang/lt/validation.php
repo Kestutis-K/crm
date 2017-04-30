@@ -82,7 +82,7 @@ return [
     ],
     'string'               => 'The :attribute must be a string.',
     'timezone'             => 'The :attribute must be a valid zone.',
-    'unique'               => 'The :attribute has already been taken.',
+    'unique'               => ':attribute jau egzistuoja.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
@@ -130,6 +130,9 @@ return [
         'password' => 'Slaptažodio',
         'password_confirmation' => 'Slaptažodžio patvirtinimo',
         'email' => 'El. paštas',
+        'name' => 'Vardas ar pavadinimas',
+        'type' => 'Kliento tipo',
+        'vip' => 'Svarbaus kliento',
     ],
 
 ];

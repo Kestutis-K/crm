@@ -28,49 +28,12 @@
             <div class="menu_section">
                 <h3>Pagrindinis meniu</h3>
                 <ul class="nav side-menu">
-                    <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Dashboard2</a></li>
-                            <li><a href="#">Dashboard3</a></li>
-                        </ul>
+                    <li><a href="/"><i class="fa fa-home"></i> Pradžia </a>
                     </li>
-                    <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-users"></i> Klientai <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="#">General Form</a></li>
-                            <li><a href="#">Advanced Components</a></li>
-                            <li><a href="#">Form Validation</a></li>
-                            <li><a href="#">Form Wizard</a></li>
-                            <li><a href="#">Form Upload</a></li>
-                            <li><a href="#">Form Buttons</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="#">General Elements</a></li>
-                            <li><a href="#">Media Gallery</a></li>
-                            <li><a href="#">Typography</a></li>
-                            <li><a href="#">Icons</a></li>
-                            <li><a href="#">Glyphicons</a></li>
-                            <li><a href="#">Widgets</a></li>
-                            <li><a href="#">Invoice</a></li>
-                            <li><a href="#">Inbox</a></li>
-                            <li><a href="#">Calendar</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="#">Tables</a></li>
-                            <li><a href="#">Table Dynamic</a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="#">Chart JS</a></li>
-                            <li><a href="#">Chart JS2</a></li>
-                            <li><a href="#">Moris JS</a></li>
-                            <li><a href="#">ECharts</a></li>
-                            <li><a href="#">Other Charts</a></li>
+                            <li><a href="/clients">Visi klientai</a></li>
+                            <li><a href="/clients/create">Sukurti klientą</a></li>
                         </ul>
                     </li>
                     @if (! Gate::allows('admin'))
