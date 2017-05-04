@@ -3,11 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
 
-class File extends Model
+class Task extends Model
 {
-    use Searchable;
     use \Venturecraft\Revisionable\RevisionableTrait;
     protected $revisionCreationsEnabled = true;
     protected $revisionCleanup = true; //Remove old revisions (works only when used with $historyLimit)

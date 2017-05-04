@@ -11,6 +11,7 @@ use Intervention\Image\Facades\Image;
 
 class ClientsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -35,6 +36,9 @@ class ClientsController extends Controller
      */
     public function create()
     {
+        if (! Gate::allows('all')) {
+            return abort(401);
+        }
         return view('clients.create');
     }
 
@@ -75,7 +79,11 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        //
+        if (! Gate::allows('all')) {
+            return abort(401);
+        }
+        $client = Client::with('profile')->findOrFail($id);
+        return view('clients.show', compact('client'));
     }
 
     /**
@@ -86,7 +94,12 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (! Gate::allows('all')) {
+            return abort(401);
+        }
+        $client = Client::findOrFail($id);
+        return view('clients.edit', compact('client'));
+
     }
 
     /**
@@ -98,7 +111,29 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (! Gate::allows('all')) {
+            return abort(401);
+        }
+        $client = Client::findOrFail($id);
+        $input = $request->all();
+        if($request->hasFile('photo')) {
+            if(file_exists(public_path().'/images/avatars/'.$client->photo)) {
+                if($client->photo != 'logo.png') {
+                    unlink(public_path().'/images/avatars/'.$client->photo);} }
+            $file = $request->file('photo');
+            $name = time() .".". $file->getClientOriginalExtension();
+            $img = Image::make($file)->resize(null, 250, function($constraint) {$constraint->aspectRatio();});
+            $img->save('images/avatars/'.$name, 99);
+            $input['photo'] = $name;
+            session()->flash('flash_blue', 'Kliento duomenys atnaujinti!');
+            $client->update($input);
+            return back();
+        } else {
+            $client->update($input);
+            session()->flash('flash_blue', 'Kliento duomenys atnaujinti!');
+            return back();
+        }
+
     }
 
     /**
@@ -109,10 +144,22 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (! Gate::allows('all')) {
+            return abort(401);
+        }
+        $client = Client::findOrFail($id);
+        if($client->photo != 'logo.png') {
+            unlink(public_path().'/images/avatars/'.$client->photo);
+        }
+        session()->flash('flash_red', 'Klientas '. $client->name .' ištrintas!');
+        $client->delete();
+        return redirect()->route('clients.index');
     }
 
     public function searchByLetter($letter) {
+        if (! Gate::allows('all')) {
+            return abort(401);
+        }
         $clients = Client::with('user')->where('name', 'LIKE', $letter.'%')->get();
         $letters = Client::all(['name'])->map(function(Client $client){
             return strtoupper(substr($client->name, 0, 1));

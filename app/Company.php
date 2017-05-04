@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
+    use \Venturecraft\Revisionable\RevisionableTrait;
+
     protected $fillable =
         [
             'title',

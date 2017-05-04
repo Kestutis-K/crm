@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Profile;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
@@ -89,6 +90,7 @@ class ProfilesController extends Controller
         }
         $input = $request->all();
         $profile = Profile::findOrFail($id);
+        $user = User::findOrFail($id);
         if($request->hasFile('photo')) {
             if(file_exists(public_path().'/images/avatars/'.$profile->photo)) {
                 if($profile->photo != '150x150.png') {
@@ -103,6 +105,8 @@ class ProfilesController extends Controller
             return back();
         } else {
         $profile->update($input);
+        $user->name = $input['firstname']." ".$input['lastname'];
+        $user->save();
         session()->flash('flash_blue', 'Profilis atnaujintas!');
         return back();
         }

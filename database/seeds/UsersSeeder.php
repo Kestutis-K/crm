@@ -14,6 +14,7 @@ class UsersSeeder extends Seeder
         $seeds = [
             [
                 'id'=>1,
+                'name'=>'Jonas Jonaitis',
                 'email'=>'sbadmin@sbadmin.lt',
                 'password'=>'$2y$10$uuzJR6kqNYEZ4SP0S8Jg1OTI0Q3xJqMuN/7D7q9Ze3r7QcyrZdwMK',
                 'role_id'=>'1',

@@ -1,14 +1,5 @@
-@extends ('layouts.app')
-
-@section ('content')
 
     <div class="">
-        <div class="page-title">
-            <div class="title_left">
-                <h3>Redaguoti kliento duomenis</h3>
-            </div>
-
-        </div>
 
         <div class="clearfix"></div>
 
@@ -16,29 +7,7 @@
             <!-- form profile -->
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Redaguoti kliento duomenis</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li>
-                                <a href="{{route('clients.show',$client->id)}}">
-                                    <button type="button" class="btn btn-primary btn-xs">
-                                        <i class="fa fa-user"> </i> Eiti į kliento kortelę
-                                    </button></a>
-                            </li>
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
                     <div class="x_content">
-                        @if(session()->has('flash_blue'))
-                            <p class="bg-success"><strong>{{session()->get('flash_blue')}}</strong></p>
-                        @endif
-                        @if(session()->has('flash_red'))
-                            <p class="bg-success"><strong>{{session()->get('flash_red')}}</strong></p>
-                        @endif
                         <br />
                         @if (count($errors) >0)
                             <div class="bg-danger">
@@ -194,5 +163,3 @@
 
 
     </div>
-
-@stop

@@ -179,6 +179,8 @@ return [
         'Barryvdh\Debugbar\ServiceProvider',
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
+
 
     ],
 
