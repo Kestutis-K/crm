@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Comment;
 use App\Http\Requests\CreateClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,8 +83,10 @@ class ClientsController extends Controller
         if (! Gate::allows('all')) {
             return abort(401);
         }
-        $client = Client::with('profile')->findOrFail($id);
-        return view('clients.show', compact('client'));
+        $client = Client::with('comment')->findOrFail($id);
+        $profile = Client::find($id)->profile()->first();
+        //return $profile;
+        return view('clients.show', compact('client', 'profile'));
     }
 
     /**

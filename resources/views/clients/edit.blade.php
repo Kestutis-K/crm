@@ -155,9 +155,9 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('comment', 'Komentaras', ['class' => 'control-label col-md-3 col-sm-3 col-xs-3']) !!}
+                            {!! Form::label('note', 'Komentaras', ['class' => 'control-label col-md-3 col-sm-3 col-xs-3']) !!}
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {!! Form::textarea('comment', $client->comment, ['class' => 'form-control', 'rows' => 4, 'cols' => 40]) !!}
+                                {!! Form::textarea('note', $client->note, ['class' => 'form-control', 'rows' => 4, 'cols' => 40]) !!}
                             </div>
                         </div>
 

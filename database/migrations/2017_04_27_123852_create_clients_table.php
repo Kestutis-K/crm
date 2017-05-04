@@ -26,7 +26,7 @@ class CreateClientsTable extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('postcode')->nullable();
-            $table->longText('comment')->nullable();
+            $table->longText('note')->nullable();
             $table->string('vip');
             $table->string('bank')->nullable();
             $table->string('bank_account')->nullable();

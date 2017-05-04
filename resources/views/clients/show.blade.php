@@ -68,13 +68,13 @@
                             @endif
                         <div class="" role="tabpanel" data-example-id="togglable-tabs">
                             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Kliento kontaktai</a>
+                                <li role="presentation" class="active"><a href="#tab_client" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-info" aria-hidden="true"></i> Kliento kontaktai</a>
                                 </li>
-                                <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Istorija</a>
+                                <li role="presentation" class=""><a href="#tab_history" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-history" aria-hidden="true"></i> Istorija</a>
                                 </li>
                             </ul>
                             <div id="myTabContent" class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_client" aria-labelledby="home-tab">
                                     @if ($client->comp_id)
                                         <div class="mail_list listing">
                                             <div class="col-md-4 col-sm-4 col-xs-12"><strong>Įmonės kodas</strong></div>
@@ -141,16 +141,16 @@
                                                 <div class="col-md-8 col-sm-8 col-xs-12">{{$client->postcodebank_account}}</div>
                                             </div>
                                         @endif
-                                        @if ($client->comment)
+                                        @if ($client->note)
                                             <div class="mail_list listing">
                                                 <div class="col-md-4 col-sm-4 col-xs-12"><strong>Komentarai</strong></div>
-                                                <div class="col-md-8 col-sm-8 col-xs-12">{{$client->comment}}</div>
+                                                <div class="col-md-8 col-sm-8 col-xs-12">{{$client->note}}</div>
                                             </div>
                                         @endif
 
 
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                <div role="tabpanel" class="tab-pane fade" id="tab_history" aria-labelledby="profile-tab">
                                     <ul class="to_do">
                                         @foreach($client->revisionHistory as $history )
                                             <li><strong>{{ $history->userResponsible()->name }}</strong> pakeitė {{ $history->fieldName() }} iš {{ $history->oldValue() }} į {{ $history->newValue() }}</li>
@@ -264,8 +264,95 @@
                     </div>
                 </div>
 
+
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2><i class="fa fa-tasks" aria-hidden="true"></i> Užduotys, komentarai</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#tab_comments" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-commenting-o" aria-hidden="true"></i> Komentarai</a>
+                                    </li>
+                                    <li role="presentation" class=""><a href="#tab_tasks" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-tasks" aria-hidden="true"></i> Užduotys</a>
+                                    </li>
+                                </ul>
+                                <div id="myTabContent" class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade active in" id="tab_comments" aria-labelledby="home-tab">
+
+                                        {!! Form::open(['method' => 'POST', 'route' => ['comments.store']]) !!}
+                                        <div class="row">
+                                            <div class="col-xs-12 form-group">
+                                                {!! Form::textarea('comment', null, ['class' => 'form-control', 'placeholder' => 'Komentaras']) !!}
+                                                {!! Form::hidden('client_id', $client->id, ['class' => 'form-control']) !!}
+                                                {!! Form::hidden('user_id', Auth::user()->id, ['class' => 'form-control']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12 form-group">
+                                                {!! Form::submit(trans('Komentuoti'), ['class' => 'btn btn-default']) !!}
+                                            </div>
+                                        </div>
+                                        {!! Form::close() !!}
+                                        <div>
+                                            <div><br><strong>Komentarai</strong></div>
+                                            <ul class="list-unstyled msg_list">
+                                                @foreach($client->comment as $comment)
+                                                    <li>
+                                                        <a>
+                                                        <span class="image">
+                                                          <img src="/images/avatars/{{$profile->photo}}" alt="img" />
+                                                        </span>
+                                                            <span>
+                                                          <span>{{$profile->firstname}} {{$profile->lastname}}</span>
+                                                          <span class="time_del">{{$comment['created_at']}}</span>
+
+                                                        </span>
+                                                            <span class="message">
+                                                          {{$comment['comment']}}
+                                                        </span>
+
+                                                        </a>
+                                                    </li>
+
+                                                @endforeach
+                                            </ul>
+
+                                        </div>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_tasks" aria-labelledby="profile-tab">
+                                        <p>{{$client->address}}</p>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_content6" aria-labelledby="profile-tab">
+                                        <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+                                            booth letterpress, commodo enim craft beer mlkshk </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
         </div>
         <div class="clearfix"></div>
+
+            <div class="">
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                </div>
+            </div>
+
+
+            <div class="clearfix"></div>
 
     </div>
 

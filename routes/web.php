@@ -24,6 +24,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('profiles', 'ProfilesController');
     Route::resource('companies', 'CompaniesController');
     Route::resource('clients', 'ClientsController');
+    Route::resource('comments', 'CommentsController');
+    Route::resource('tasks', 'TasksController');
     Route::post('searchclient', 'SearchController@searchClient');
     Route::get('clients/sbyl/{letter}', 'ClientsController@searchByLetter')->name('sbyl');
     Route::resource('files', 'FilesController');

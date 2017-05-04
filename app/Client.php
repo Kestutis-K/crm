@@ -80,4 +80,8 @@ class Client extends Model
         return $this->hasMany('App\File');
     }
 
+    public function comment() {
+        return $this->hasMany('App\Comment', 'client_id');
+    }
+
 }
