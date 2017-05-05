@@ -1514,6 +1514,21 @@ ul.msg_list li a .message {
     display: block !important;
     font-size: 11px
 }
+
+.comment-over {
+    position: relative;
+}
+
+.hover-btn {
+    position: absolute;
+    right: 15px;
+    display: none;
+}
+
+.comment-over:hover .hover-btn {
+    display: block;
+}
+
 .dropdown-menu.msg_list span {
     white-space: normal
 }

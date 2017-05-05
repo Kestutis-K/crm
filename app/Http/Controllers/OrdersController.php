@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
-class CommentsController extends Controller
+class OrdersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +23,7 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.create');
     }
 
     /**
@@ -36,13 +34,7 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        if (! Gate::allows('all')) {
-            return abort(401);
-        }
-        $input = $request->all();
-        Comment::create($input);
-        return back();
-
+        //
     }
 
     /**
@@ -76,10 +68,7 @@ class CommentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->all();
-        $comment = Comment::findOrFail($id);
-        $comment->update($input);
-        return back();
+        //
     }
 
     /**
@@ -90,10 +79,6 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        if (! Gate::allows('all')) {
-            return abort(401);
-        }
-        $comment = Comment::findOrFail($id);
-        $comment->delete();
+        //
     }
 }

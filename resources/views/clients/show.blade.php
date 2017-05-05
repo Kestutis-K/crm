@@ -35,8 +35,8 @@
             <div class="col-md-5 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2><i class="fa fa-info "></i> Kliento duomenys <a href="" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-cog" aria-hidden="true"></i></a></h2>
-                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                        <h2><i class="fa fa-info "></i> Kliento duomenys <a href="" data-toggle="modal" data-target=".modal_edit_client"><i class="fa fa-cog" aria-hidden="true"></i></a></h2>
+                        <div class="modal fade modal_edit_client" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
 
@@ -181,7 +181,7 @@
                         <div class="x_content">
                             <div class="" role="tabpanel" data-example-id="togglable-tabs">
                                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                                    <li role="presentation" class="active"><a href="#tab_content4" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Kliento kontaktai</a>
+                                    <li role="presentation" class="active"><a href="#tab_content4" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-money" aria-hidden="true"></i> žsakymai</a>
                                     </li>
                                     <li role="presentation" class=""><a href="#tab_content5" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Profile</a>
                                     </li>
@@ -264,6 +264,9 @@
                     </div>
                 </div>
 
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                    &nbsp;
+                </div>
 
                 <div class="col-md-7 col-sm-12 col-xs-12">
                     <div class="x_panel">
@@ -305,8 +308,8 @@
                                         <div>
                                             <div><br><strong>Komentarai</strong></div>
                                             <ul class="list-unstyled msg_list">
-                                                @foreach($client->comment as $comment)
-                                                    <li>
+                                                @foreach ($client->comment as $comment)
+                                                    <li class="comment-over">
                                                         <a>
                                                         <span class="image">
                                                           <img src="/images/avatars/{{$profile->photo}}" alt="img" />
@@ -321,13 +324,55 @@
                                                         </span>
 
                                                         </a>
+                                                        <div class="hover-btn">
+                                                            @if($comment['user_id'] == Auth::user()->id || Auth::user()->role_id == 1)
+                                                            <div style="float: right;">
+                                                                <form action="/comments/{{$comment->id}}" method="post">
+                                                                    <a href="{{route('comments.destroy',$comment->id)}}">
+                                                                        <input type="hidden" name="_token" value="{{csrf_token()}}" >
+                                                                        <input name="_method" type="hidden" value="DELETE">
+                                                                        <button type="submit" name="submit" class="btn btn-default">
+                                                                            <i class="fa fa-trash-o"> </i>
+                                                                        </button></a>
+                                                                </form>
+                                                            </div>
+                                                            @endif
+
+                                                            @if($comment['user_id'] == Auth::user()->id || Auth::user()->role_id == 1)
+                                                            <div style="float: right;">
+
+                                                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".edit_comment">
+                                                                        <i class="fa fa-pencil"> </i>
+                                                                    </button>
+                                                            </div>
+
+                                                                @endif
+
+                                                        </div>
                                                     </li>
 
                                                 @endforeach
                                             </ul>
 
                                         </div>
+                                        <div class="modal fade edit_comment" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                                                        </button>
+                                                        <h4 class="modal-title" id="myModalLabel">Redaguoti komentarą</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @include ('comments.modal_edit')
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
+
 
                                     <div role="tabpanel" class="tab-pane fade" id="tab_tasks" aria-labelledby="profile-tab">
                                         <p>{{$client->address}}</p>
