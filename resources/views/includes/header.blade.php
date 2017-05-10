@@ -23,6 +23,7 @@
     <link href="/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
     <link href="/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <link href="/css/select2.min.css" rel="stylesheet"/>
 
     <!-- bootstrap-daterangepicker -->
     {{--<link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">--}}
@@ -36,6 +37,8 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
+
 
 
 </head>

@@ -13,6 +13,7 @@ class Order extends Model
     protected $historyLimit = 50; //Maintain a maximum of 500 changes at any point of time, while cleaning up old revisions.
 
     use Searchable;
+
     public function toSearchableArray()
     {
         $array = $this->toArray();
@@ -31,7 +32,18 @@ class Order extends Model
 
     protected $fillable =
         [
-
+            'user_id',
+            'client_id',
+            'stage',
+            'products',
+            'advance',
+            'delivery_date',
+            'contract',
+            'contract_no',
         ];
+
+    public function clients() {
+        return $this->belongsToMany('App\Client');
+    }
 
 }

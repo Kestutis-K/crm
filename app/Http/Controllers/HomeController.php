@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    use Functions;
     /**
      * Create a new controller instance.
      *
@@ -23,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $clients = Client::count();
+        $lastWeekClients = $this->weekAgoStatic('App\Client');
+        return view('home', compact('clients', 'lastWeekClients'));
     }
 }

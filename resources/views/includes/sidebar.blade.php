@@ -36,6 +36,14 @@
                             <li><a href="/clients/create">Sukurti klientą</a></li>
                         </ul>
                     </li>
+
+                    <li><a><i class="fa fa-users"></i> Užsakymai <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="/orders">Visi užsakymai</a></li>
+                            <li><a href="/orders/create">Sukurti užsakymą</a></li>
+                        </ul>
+                    </li>
+
                     @if (! Gate::allows('admin'))
                     @else
                     <li><a><i class="fa fa-gears"></i>Valdymas <span class="fa fa-chevron-down"></span></a>

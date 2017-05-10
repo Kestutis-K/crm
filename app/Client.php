@@ -2,11 +2,16 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Sofa\Eloquence\Eloquence;
 
 class Client extends Model
 {
+    use Eloquence;
+    protected $searchableColumns = ['name'];
+
     use \Venturecraft\Revisionable\RevisionableTrait;
     protected $revisionCleanup = true; //Remove old revisions (works only when used with $historyLimit)
     protected $revisionCreationsEnabled = true;
@@ -30,6 +35,11 @@ class Client extends Model
         'photo' => 'nuotrauką/logotipą',
 
     );
+
+    public function getDatesAttribute($value)
+    {
+        $this->attributes['created_at'] = Carbon::createFromFormat('Y/m/d', $value);
+    }
 
     use Searchable;
 
@@ -82,6 +92,10 @@ class Client extends Model
 
     public function comment() {
         return $this->hasMany('App\Comment', 'client_id');
+    }
+
+    public function clients() {
+        return $this->belongsToMany('App\Order', 'client_id');
     }
 
 }

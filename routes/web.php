@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('tasks', 'TasksController');
     Route::resource('orders', 'OrdersController');
     Route::post('searchclient', 'SearchController@searchClient');
+    Route::get('/orders/find/{q}', 'OrdersController@findClient');
+    Route::get('/clients/info/{id}', 'ClientsController@info');
     Route::get('clients/sbyl/{letter}', 'ClientsController@searchByLetter')->name('sbyl');
     Route::resource('files', 'FilesController');
     Route::post('changepassword/{id}', 'UsersController@changePassword');

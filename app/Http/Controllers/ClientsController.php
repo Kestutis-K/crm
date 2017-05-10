@@ -8,6 +8,7 @@ use App\Http\Requests\CreateClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 
 class ClientsController extends Controller
@@ -169,4 +170,12 @@ class ClientsController extends Controller
         })->unique()->sortBy('name');
         return view('clients.index', compact('clients', 'letters'));
     }
+
+    public function info($id) {
+        $client = Client::findOrFail($id);
+        //$client[] = ['id'=>$client->id, 'name'=>$client->name, 'comp_id'=>$client->comp_id];
+        return Response::json($client);
+    }
+
+
 }
