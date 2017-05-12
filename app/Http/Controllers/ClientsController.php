@@ -171,11 +171,46 @@ class ClientsController extends Controller
         return view('clients.index', compact('clients', 'letters'));
     }
 
+    //-------------------------------------------
+    //---------- For Select2 search: Start ----------
+    //-------------------------------------------
     public function info($id) {
         $client = Client::findOrFail($id);
         //$client[] = ['id'=>$client->id, 'name'=>$client->name, 'comp_id'=>$client->comp_id];
         return Response::json($client);
     }
 
+    public function findClient(Request $request)
+    {
+        $term = $request->q;
+        if (empty($term)) {
+            return Response::json([]);
+        }
+        $clients = Client::search($term)->get();
+        $found_clients = [];
+        foreach ($clients as $client) {
+            $found_clients[] = [
+                'id'=>$client->id,
+                'text'=>$client->name,
+                'type'=>$client->type,
+                'name'=>$client->name,
+                'vip'=>$client->vip,
+                'note'=>$client->note,
+                'comp_id'=>$client->comp_id,
+                'comp_vat'=>$client->comp_vat,
+                'comp_phone'=>$client->phone,
+                'email'=>$client->email,
+                'address'=>$client->address,
+                'city'=>$client->city,
+                'country'=>$client->country,
+                'postcode'=>$client->postcode,
+                'photo'=>$client->photo,
+            ];
+        }
+        return Response::json($found_clients);
+    }
+    //-------------------------------------------
+    //---------- For Select2 search: Start ----------
+    //-------------------------------------------
 
 }

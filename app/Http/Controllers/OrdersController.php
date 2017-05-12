@@ -85,17 +85,5 @@ class OrdersController extends Controller
         //
     }
 
-    public function findClient(Request $request)
-    {
-        $term = $request->q;
-        if (empty($term)) {
-            return Response::json([]);
-        }
-        $clients = Client::search($term)->get();
-        $found_clients = [];
-        foreach ($clients as $client) {
-            $found_clients[] = ['id'=>$client->id, 'text'=>$client->name, 'name'=>$client->name, 'comp_id'=>$client->comp_id];
-        }
-        return Response::json($found_clients);
-    }
+
 }

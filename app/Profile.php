@@ -23,6 +23,10 @@ class Profile extends Model
         return $this->uploads . $photo;
     }
 
+    public function users() {
+        return $this->hasOne('App\User');
+    }
+
 
 
 

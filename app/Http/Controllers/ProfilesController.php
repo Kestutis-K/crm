@@ -123,5 +123,4 @@ class ProfilesController extends Controller
         //
     }
 
-
 }

@@ -4465,12 +4465,12 @@ S2.define('select2/i18n/en',[],function () {
   // English
   return {
     errorLoading: function () {
-      return 'The results could not be loaded.';
+      return 'Nepavyko užkrauti rezultatų.';
     },
     inputTooLong: function (args) {
       var overChars = args.input.length - args.maximum;
 
-      var message = 'Please delete ' + overChars + ' character';
+      var message = 'Ištinkite ' + overChars + ' simbolį';
 
       if (overChars != 1) {
         message += 's';
@@ -4481,15 +4481,15 @@ S2.define('select2/i18n/en',[],function () {
     inputTooShort: function (args) {
       var remainingChars = args.minimum - args.input.length;
 
-      var message = 'Please enter ' + remainingChars + ' or more characters';
+      var message = 'Įveskite ' + remainingChars + ' ar daugiau simbolių';
 
       return message;
     },
     loadingMore: function () {
-      return 'Loading more results…';
+      return 'Užkraunama daugiau rezultatų…';
     },
     maximumSelected: function (args) {
-      var message = 'You can only select ' + args.maximum + ' item';
+      var message = 'Galite pasirinkti tik ' + args.maximum + ' reikšmes';
 
       if (args.maximum != 1) {
         message += 's';
@@ -4498,10 +4498,10 @@ S2.define('select2/i18n/en',[],function () {
       return message;
     },
     noResults: function () {
-      return 'No results found';
+      return 'Nieko nerasta';
     },
     searching: function () {
-      return 'Searching…';
+      return 'Ieškoma…';
     }
   };
 });
