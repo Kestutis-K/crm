@@ -108,9 +108,141 @@ $(".js-select-search2").on('change', function(e) {
 //----------- Add product fields (create order page): Start -----------
 //---------------------------------------------------------------------
 
+// var pricesVat = parseInt(prices_vat);
+// var upVat = parseInt(vat);
+// if(pricesVat === 1) {
+// $(".js--price").change(function(){
+//     var price = Number($(this).val());
+//     var total = price - ((price * upVat) / (100 + upVat));
+//     $(".js--price-calc"+ productIndex).val(total);
+//
+// });
+// } else {
+//     $(".js--price").change(function(){
+//         var price = Number($(this).val());
+//         var total = ((price * upVat) / 100) + price;
+//         $(".js--price-calc0"+ productIndex).val(total);
+//     });
+// }
 
 
-document.querySelector('#js--products').insertAdjacentHTML('beforeend', productsReplace);
+
+$(document).ready(function() {
+    var titleValidators = {
+            row: '.js--product-title',   // The title is placed inside a <div class="col-xs-4"> element
+            validators: {
+                notEmpty: {
+                    message: 'Būtina įrašyti produkto ar paslaugos pavadinimą'
+                }
+            }
+        },
+        quantityValidators = {
+            row: '.js--quantity',
+            validators: {
+                notEmpty: {
+                    message: 'Būtina įrašyti kiekį'
+                }
+            }
+        },
+        priceValidators = {
+            row: '.js--price',
+            validators: {
+                notEmpty: {
+                    message: 'Būtina įrašyti kainą'
+                },
+                numeric: {
+                    message: 'Kaina turi būti sudaryta tik iš skaičių'
+                }
+            }
+        },
+        productIndex = 0;
+
+    $('#js--products')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                'product[0].product-title': titleValidators,
+                'product[0].quantity': quantityValidators,
+                'product[0].price': priceValidators
+            }
+        })
+
+        // Add button click handler
+        .on('click', '.add__btn', function() {
+            productIndex++;
+            var $template = $('#productTemplate'),
+                $clone    = $template
+                    .clone()
+                    .removeClass('hide')
+                    .removeAttr('id')
+                    .attr('data-product-index', productIndex)
+                    .insertBefore($template);
+
+            // Update the name attributes
+            $clone
+                .find('[name="jsProductTitle"]').attr('name', 'product[' + productIndex + '].product-title').end()
+                .find('[name="jsQuantity"]').attr('name', 'product[' + productIndex + '].quantity').end()
+                .find('[name="jsPrice"]').attr('name', 'product[' + productIndex + '].price').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#js--products')
+                .formValidation('addField', 'product[' + productIndex + '].product-title', titleValidators)
+                .formValidation('addField', 'product[' + productIndex + '].quantity', quantityValidators)
+                .formValidation('addField', 'product[' + productIndex + '].price', priceValidators);
+
+
+        })
+
+        // Remove button click handler
+        .on('click', '.remove__btn', function() {
+            var $row  = $(this).parents('.form-group'),
+                index = $row.attr('data-product-index');
+
+            // // Remove fields
+             $('#js--products')
+                .formValidation('removeField', $row.find('[name="product[' + index + '].product-title"]'))
+                .formValidation('removeField', $row.find('[name="product[' + index + '].quantity"]'))
+                .formValidation('removeField', $row.find('[name="product[' + index + '].price"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+
+
+    // var pricesVat = parseInt(prices_vat);
+
+    // if(pricesVat === 1) {
+    $(document).on('keyup', '.js--price', function() {
+        var upVat = parseInt(vat);
+            var price = Number($(this).val());
+            var total = price - ((price * upVat) / (100 + upVat));
+            var totals = total.toFixed(2)
+
+            var priceWithoutVatElement = $(this)
+                .closest('.product-row')
+                .find('.js--price-calc');
+            console.log(total);
+            console.log(priceWithoutVatElement);
+            priceWithoutVatElement.val(totals);
+
+        });
+
+    // } else {
+    //     $(".js--price"+ productIndex).change(function(){
+    //         var price = Number($(this).val());
+    //         var total = ((price * upVat) / 100) + price;
+    //         $(".js--price-calc"+ productIndex).val(total);
+    //     });
+    // }
+});
+
+
 
 //---------------------------------------------------------------------
 //----------- Add product fields (create order page): End -----------

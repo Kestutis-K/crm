@@ -46,4 +46,8 @@ class Order extends Model
         return $this->belongsToMany('App\Client');
     }
 
+    public function company() {
+        return $this->hasOne('App\Company');
+    }
+
 }

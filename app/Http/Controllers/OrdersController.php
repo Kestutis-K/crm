@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -26,7 +27,8 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        return view('orders.create', compact('client'));
+        $company = Company::findOrFail(1);
+        return view('orders.create', compact('client', 'company'));
     }
 
     /**

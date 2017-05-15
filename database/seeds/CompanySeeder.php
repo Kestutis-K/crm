@@ -27,6 +27,8 @@ class CompanySeeder extends Seeder
                 'mob_phone'=>'Mobilusis telefonas',
                 'website'=>'Internetinis puslapis',
                 'logo'=>'logo.png',
+                'prices_vat'=>'1',
+                'vat'=>'21',
             ],
         ];
 

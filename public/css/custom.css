@@ -4287,3 +4287,35 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+.add__btn {
+     font-size: 35px;
+     background: none;
+     border: none;
+     color: #28B9B5;
+     cursor: pointer;
+     display: inline-block;
+     vertical-align: middle;
+     line-height: 1.1;
+     margin-left: 10px;
+ }
+
+.add__btn:active { transform: translateY(2px); }
+
+.add__btn:focus { outline: none; }
+
+.remove__btn {
+    font-size: 35px;
+    background: none;
+    border: none;
+    color: #b94a30;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.1;
+    margin-left: 10px;
+}
+
+.remove__btn:active { transform: translateY(2px); }
+
+.remove__btn:focus { outline: none; }

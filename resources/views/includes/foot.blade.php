@@ -27,15 +27,26 @@
 <script src="/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
 <script src="/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
 <script src="/vendors/flot.curvedlines/curvedLines.js"></script>
-<!-- DateJS -->
-<script src="/vendors/DateJS/build/date.js"></script>
+{{--<!-- DateJS -->--}}
+{{--<script src="/vendors/DateJS/build/date.js"></script>--}}
 <!-- JQVMap -->
 <script src="/vendors/jqvmap/dist/jquery.vmap.js"></script>
 <script src="/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
 <script src="/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
 <!-- bootstrap-daterangepicker -->
 <script src="/vendors/moment/min/moment.min.js"></script>
+<script src="/vendors/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/vendors/moment/min/moment.min.js"></script>
 <script src="/js/select2.js"></script>
+
+<script src="/js/formValidation.min.js"></script>
+<script src="/js/framework/bootstrap.min.js"></script>
+<script src="/js/framework/foundation.min.js"></script>
+<script src="/js/framework/pure.min.js"></script>
+<script src="/js/framework/semantic.min.js"></script>
+<script src="/js/framework/uikit.min.js"></script>
+
+
 {{--<script src="/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>--}}
 <!-- Custom Theme Scripts -->
 

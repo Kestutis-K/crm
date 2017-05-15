@@ -23,5 +23,11 @@ class Company extends Model
             'mob_phone',
             'website',
             'logo',
+            'prices_vat',
+            'vat',
         ];
+
+
 }
+
+

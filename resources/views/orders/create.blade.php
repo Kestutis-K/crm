@@ -12,7 +12,7 @@
 
 
         <div class="row">
-            <div class="col-md-6 col-xs-12">
+            <div class="col-md-4 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Klientas </h2>
@@ -81,7 +81,7 @@
 
             </div>
 
-            <div class="col-md-6 col-xs-12">
+            <div class="col-md-8 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Užsakymo duomenys</h2>
@@ -96,7 +96,7 @@
                     <div class="x_content">
                         <br />
 
-                        {!! Form::open(['method' => 'POST', 'route' => ['orders.store'], 'files' => true,]) !!}
+                        {!! Form::open(['method' => 'POST', 'route' => ['orders.store'], 'id'=>'js--products', 'files' => true,]) !!}
 
                         {!! Form::hidden('user_id', 0, ['id' => 'js--userid']) !!}
                         <div class="row">
@@ -105,11 +105,89 @@
                                 {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => '']) !!}
                             </div>
                         </div>
+                        <div class="x_panel">
+                            <div class="row">
+                                <h2>Produktai ar paslaugos</h2>
+                            </div>
+                            <div >
+                                <script>
+                                    var vat = [];
+                                    var prices_vat = [] ;
+                                    vat.push('{{ $company->vat }}');
+                                    prices_vat.push('{{ $company->prices_vat }}');
+                                </script>
+                                <div class="form-group product-row">
+                                    <div class="col-lg-5 col-md-12 col-xs-12 form-group">
+                                        <input type="text" name="product[0].product-title" class="form-control js--product-name" placeholder="Produktas ar paslauga">
+                                    </div>
+                                    <div class="col-lg-2 col-md-12 col-xs-12 form-group">
+                                        <input type="text" name="product[0].quantity" class="form-control js--quantity" placeholder="Kiekis">
+                                    </div>
+                                    @if ($company->prices_vat)
+                                    <div class="col-lg-2 col-md-12 col-xs-12 form-group">
+                                        <input type="text" name="product[0].price2" class="form-control js--price-calc"  placeholder="Kaina be PVM" readonly>
+                                    </div>
+                                    <div class="col-lg-2 col-md-12 col-xs-12 form-group">
+                                        <input type="text" name="product[0].price" class="form-control js--price"  placeholder="Kaina su PVM"  >
+                                    </div>
+                                    @else
+                                        <div class="col-lg-2 col-md-12 col-xs-12 form-group">
+                                            <input type="text" name="product[0].price" class="form-control js--price" placeholder="Kaina be PVM" >
+                                        </div>
+                                        <div class="col-lg-2 col-md-12 col-xs-12 form-group">
+                                            <input type="text" name="product[0].price2" class="form-control js--price-calc" placeholder="Kaina su PVM"  readonly>
+                                        </div>
+                                    @endif
+                                    <div class="col-lg-1 col-md-12 col-xs-1">
+                                        <button type="button" class="add__btn"><i class="fa fa-plus-circle"></i></button>
+                                    </div>
+                                </div>
+                            </div>
 
+                            {{--Template--}}
+                                <div class="form-group product-row hide" id="productTemplate">
+                                    <div class="col-lg-5 col-md-12 col-xs-12 form-group">
+                                        <input type="text" name="jsProductTitle" class="form-control js--product-name" placeholder="Produktas ar paslauga">
+                                    </div>
+                                    <div class="col-lg-2 col-md-12 col-xs-12 form-group">
+                                        <input type="text" name="jsQuantity" class="form-control js--quantity" placeholder="Kiekis">
+                                    </div>
+                                    @if ($company->prices_vat)
+                                        <div class="col-lg-2 col-md-12 col-xs-12 form-group">
+                                            <input type="text" name="" class="form-control js--price-calc" placeholder="Kaina be PVM" readonly>
+                                        </div>
+                                        <div class="col-lg-2 col-md-12 col-xs-12 form-group">
+                                            <input type="text" name="jsPrice" class="form-control js--price" placeholder="Kaina su PVM"  >
+                                        </div>
+                                    @else
+                                        <div class="col-lg-2 col-md-12 col-xs-12 form-group">
+                                            <input type="text" name="jsPrice" class="form-control js--price" placeholder="Kaina be PVM" >
+                                        </div>
+                                        <div class="col-lg-2 col-md-12 col-xs-12 form-group">
+                                            <input type="text" name="" class="form-control js--price-calc" placeholder="Kaina su PVM"  readonly>
+                                        </div>
+                                    @endif
+                                    <div class="col-lg-1 col-md-12 col-xs-1">
+                                        <button type="button" class="remove__btn"><i class="fa fa-minus-circle"></i></button>
+                                    </div>
+                                </div>
+                            {{--Template--}}
+                        </div>
+                        <div class="x_panel">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-xs-12 form-group">
+                                    {!! Form::label('advance', 'Avansas', ['class' => 'control-label']) !!}
+                                    {!! Form::text('advance', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12 form-group">
+                                    Bendra suma
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-xs-12 form-group">
-                                {!! Form::label('products', 'Prekės ar paslaugos*', ['class' => 'control-label']) !!}
-                                {!! Form::text('products', null, ['class' => 'form-control', 'placeholder' => '']) !!}
+                                <label for="delivery date">Užsakymo įvykdymo data</label>
+                                <input name="delivery_date" type="date" class="datepicker">
                             </div>
                         </div>
 
